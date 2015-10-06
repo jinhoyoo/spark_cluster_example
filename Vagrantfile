@@ -18,10 +18,11 @@ Vagrant.configure("2") do |config|
         end
         spark_master.vm.network "public_network", ip: "192.168.18.31"
         spark_master.vm.network "forwarded_port", guest: 8080, host: 8080
+        spark_master.vm.network "forwarded_port", guest: 8081, host: 8081
         spark_master.vm.network "forwarded_port", guest: 4040, host: 4040
         spark_master.vm.network "forwarded_port", guest: 7070, host: 7070
-
-        config.vm.provision "shell",inline:"sudo /home/vagrant/spark/sbin/start-master.sh -h 192.168.18.31", run:"always"
+        spark_master.vm.provision "shell",inline:"sudo /home/vagrant/spark/sbin/start-master.sh -h 192.168.18.31", run:"always"
+        spark_master.vm.provision "shell", inline: "sudo /home/vagrant/spark/sbin/start-slave.sh spark://192.168.18.31:7077", run:"always"
     end
 
     config.vm.define "spark_client0" do |spark_client0|
@@ -30,6 +31,6 @@ Vagrant.configure("2") do |config|
            vb.memory = "4096"
         end
         spark_client0.vm.network "public_network", ip: "192.168.18.32"
-        spark_client0.vm.provision "shell", inline: "sudo /home/vagrant/spark/sbin/start-slave.sh spark://192.168.18.31:7077 ", run:"always"
+        spark_client0.vm.provision "shell", inline: "sudo /home/vagrant/spark/sbin/start-slave.sh spark://192.168.18.31:7077 -h 192.168.18.32", run:"always"
     end
 end
