@@ -29,6 +29,7 @@ Vagrant.configure("2") do |config|
         spark_client0.vm.provider "virtualbox" do |vb|
            vb.memory = "4096"
         end
+        spark_client0.vm.network "public_network", ip: "192.168.18.32"
         spark_client0.vm.provision "shell", inline: "sudo /home/vagrant/spark/sbin/start-slave.sh spark://192.168.18.31:7077 ", run:"always"
     end
 end
