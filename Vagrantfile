@@ -15,6 +15,9 @@ Vagrant.configure("2") do |config|
         spark_master.vm.provider "virtualbox" do |vb|
            vb.memory = "4096"
         end
+
+        config.vm.synced_folder "master/", "/master", create: true
+        
         spark_master.vm.network "public_network", ip: "192.168.18.31"
         spark_master.vm.network "forwarded_port", guest: 8080, host: 8080
         spark_master.vm.network "forwarded_port", guest: 8081, host: 8081
