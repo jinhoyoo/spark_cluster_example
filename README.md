@@ -1,20 +1,28 @@
-#Spark cluster configuration test bed
+# Spark cluster configuration for test#
 
+## Description ##
+ Very simple Spark cluster configuration with Vagrant. I used [standalone cluster configuration](https://spark.apache.org/docs/latest/cluster-overview.html). There are two virtual marchines.
 
-## Spark master ##
+  * Spark master
+    - IP : 192.168.18.31
+    - Web UI: ```http://localhost:8080/```
+    - It has a worker service too.
+  * Spark slave
+   - IP : 192.168.18.31
+   - It has a worker service.
 
- * Web UI: http://localhost:4040/
+## How to run ##
 
-10.0.2.15
+ 1. Run ```vagrant up```
+ 2. Connect master VM by ```vagrant ssh spark_master```
+ 3. Launch http://localhost:8080/
+ 4. Run the command below.
+```
+ $> spark-submit --master spark://192.168.18.31:7077  /home/vagrant/spark/examples/src/main/python/pi.py
+ ```
+ 5. Watch Web UI what's going on.
 
-spark-submit --master spark://192.168.18.31:7077  /home/vagrant/spark/examples/src/main/python/pi.py
+## More Info ##
 
-spark-submit --master spark://192.168.18.31:7077 --deploy-mode cluster --supervise /home/vagrant/spark/examples/src/main/python/pi.py
-
-spark-submit --master spark://vagrant-ubuntu-trusty-64:7077  /home/vagrant/spark/examples/src/main/python/kmeans.py
-
-spark-submit --master spark://192.168.18.31:7077  /home/vagrant/spark/examples/src/main/python/kmeans.py
-
-sudo /home/vagrant/spark/sbin/start-slave.sh spark://192.168.18.31:7077
-
-sudo /home/vagrant/spark/sbin/start-slave.sh -h 10.0.2.15:7077
+* I just configured server in public network for learning. NEVER CONFIGURE SERVER LIKE IT.
+* I used pre-built Spark to save time. It can miss several package. So you should build Spark if you need full features of Spark.  
