@@ -1,14 +1,15 @@
-import os
 from pyspark import SparkContext
-from scipy import special, optimize
-from sklearn import svm
-from sklearn import datasets
-import numpy as np
+import numpy as np #Spark has numpy for python. 
 
 def run(sc):
-	data = range(0, 100)
+	data = [ np.arange(0, 200) ]
 	distData = sc.parallelize(data)
 
+	def sumData(x):
+		return np.sum(x)
+
+	mappedSum = distData.map( sumData )
+	return mappedSum.reduce(lambda a, b: a + b)
 
 if __name__ == '__main__':
 	print run(SparkContext() )
