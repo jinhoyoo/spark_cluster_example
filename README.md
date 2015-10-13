@@ -17,18 +17,23 @@
  2. Connect master VM by ```vagrant ssh spark_master```
  3. Launch http://localhost:8080/
  4. Run the command below.
+
 ```
  $> spark-submit --master spark://192.168.18.31:7077  /home/vagrant/spark/examples/src/main/python/pi.py
- ```
+
+```
+
  5. Watch Web UI what's going on.
 
 
 ## Test for Spark cluster ##
 
 ### Run python code in cluster. ###
+
 ```
  $> spark-submit --master spark://192.168.18.31:7077 /master/rdd_test.py
 ```
+
 ### Run python code with numpy or scipy in cluster. ###
 
  Spark master copies libraries to cllient automatically. So **Don't need to worry to deploy python libraries into client node.**  Just install python library on Spark master only.
@@ -48,8 +53,6 @@
 
 
 ```
-#!python
-
  #Compile C code. Numpy example
   $> gcc sum_of_number.c -o sum_of_number #It sums the numbers in argument.
 
@@ -57,7 +60,6 @@
   $> spark-submit --master spark://192.168.18.31:7077 /master/external_exe_example.py"
 
 ```
-
 
 
 ## More Info ##
