@@ -46,17 +46,21 @@
 
  Spark can run external execution file in cluster. Then we sholud send external execution file by using ```addFile()```. See the ```external_exe_example.py``` in project.
 
- ```
+
+```
+#!python
+
  #Compile C code. Numpy example
   $> gcc sum_of_number.c -o sum_of_number #It sums the numbers in argument.
 
  #Run script
   $> spark-submit --master spark://192.168.18.31:7077 /master/external_exe_example.py"
 
- ```
+```
+
 
 
 ## More Info ##
 
 * I just configured servers in public network for learning. ** NEVER CONFIGURE SERVER LIKE IT FOR REAL SERVICE.** .
-* I used pre-built Spark to save time. It can miss several package. So you should build Spark if you need full features of Spark.  
+* I used pre-built Spark to save time. It can miss several package. So you should build Spark if you need full features of Spark.
