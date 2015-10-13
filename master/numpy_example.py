@@ -1,8 +1,8 @@
 from pyspark import SparkContext
-import numpy as np #Spark has numpy for python. 
+import numpy as np #Spark has numpy for python.
 
 def run(sc):
-	data = [ np.arange(0, 200) ]
+	data = [np.arange(0, 99), np.arange(100, 200) ]
 	distData = sc.parallelize(data)
 
 	def sumData(x):
